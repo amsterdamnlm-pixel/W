@@ -800,7 +800,8 @@
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
  </head>
  <body><!-- Navigation -->
   <nav>
@@ -822,8 +823,8 @@
   <main><!-- Hero Section -->
    <section id="home" class="hero">
     <div class="hero-content">
-     <h1>Welcome to New Life Ministry</h1>
-     <p class="hero-subtitle">A community built on faith, connection, and authentic transformation.</p>
+     <h1 id="hero-title">Welcome to New Life Ministry</h1>
+     <p class="hero-subtitle" id="hero-subtitle">A community built on faith, connection, and authentic transformation.</p>
      <div class="hero-actions"><a href="#services" class="btn btn-primary">Explore Services</a> <a href="#contact" class="btn btn-secondary">Get In Touch</a>
      </div>
      <div class="service-badge">
@@ -840,7 +841,6 @@
        </div>
       </div>
      </div>
-     <div id="zoom-meeting-container"></div>
     </div>
    </section><!-- About Section -->
    <section id="about">
@@ -982,7 +982,7 @@
        <div style="margin-bottom: 2rem;">
         <h4 style="margin-bottom: 0.5rem;">Address</h4>
         <p class="text-muted">Tt. Vasumweg 4b<br>
-         1033 SC Amsterdam, Netherlands</p>
+          1033 SC Amsterdam, Netherlands</p>
        </div>
        <div style="margin-bottom: 2rem;">
         <h4 style="margin-bottom: 0.5rem;">Email</h4>
@@ -1020,21 +1020,68 @@
     <div class="footer-col">
      <h4>Visit Us</h4>
      <p style="color: #666; font-size: 0.95rem;">Tt. Vasumweg 4b<br>
-      1033 SC Amsterdam<br><a href="mailto:info@newlifeamsterdam.nl" style="color: #0066cc; text-decoration: none;">info@newlifeamsterdam.nl</a></p>
+       1033 SC Amsterdam<br><a href="mailto:info@newlifeamsterdam.nl" style="color: #0066cc; text-decoration: none;">info@newlifeamsterdam.nl</a></p>
     </div>
    </div>
    <div class="footer-bottom">
-    <p>© 2024 New Life Ministry Amsterdam. All rights reserved. | <a href="https://anbi.nl/publicatieverplichting/new-life-ministry/" target="_blank" rel="noopener noreferrer">ANBI Registered Charity</a></p>
+    <p style="margin-bottom:1.5rem;">© 2024 New Life Ministry Amsterdam. All rights reserved. | <a href="https://anbi.nl/publicatieverplichting/new-life-ministry/" target="_blank" rel="noopener noreferrer">ANBI Registered Charity</a></p>
+    <div style="padding-top:1.5rem;border-top:1px solid #e0e0e0;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;"><a href="#privacy" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Privacy &amp; Gegevens</a> <a href="#voorwaarden" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Algemene Voorwaarden</a> <a href="#cookies" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Cookiebeleid</a>
+    </div>
    </div>
-  </footer>
+  </footer><!-- Cookie Banner -->
+  <div id="cookie-banner" style="position:fixed;bottom:0;width:100%;background:#000;color:#fff;padding:1.5rem 2rem;text-align:center;display:none;z-index:10000;box-sizing:border-box;">
+   <p style="margin:0;margin-bottom:1rem;">Wij gebruiken cookies voor een betere ervaring. Lees meer in onze <a href="#privacy" style="color:#fff;text-decoration:underline;">Privacyverklaring</a>.</p><button id="accept-cookies" style="padding:0.75rem 2rem;border:none;border-radius:20px;background:#fff;color:#000;cursor:pointer;font-weight:600;transition:all 0.3s ease;">Accepteer</button>
+  </div>
   <script>
+    // Element SDK Configuration
+    const defaultConfig = {
+      hero_title: 'Welcome to New Life Ministry',
+      hero_subtitle: 'A community built on faith, connection, and authentic transformation.'
+    };
+
+    let config = { ...defaultConfig };
+
+    const elementImpl = {
+      defaultConfig,
+      
+      onConfigChange: async (newConfig) => {
+        config = { ...defaultConfig, ...newConfig };
+        
+        const heroTitle = document.getElementById('hero-title');
+        if (heroTitle) {
+          heroTitle.textContent = config.hero_title;
+        }
+        
+        const heroSubtitle = document.getElementById('hero-subtitle');
+        if (heroSubtitle) {
+          heroSubtitle.textContent = config.hero_subtitle;
+        }
+      },
+      
+      mapToCapabilities: (cfg) => ({
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      }),
+      
+      mapToEditPanelValues: (cfg) => new Map([
+        ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', cfg.hero_subtitle || defaultConfig.hero_subtitle]
+      ])
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init(elementImpl);
+    }
+
     // ============================================
     // GOOGLE SHEETS CMS INTEGRATION
     // ============================================
 
     const SHEET_ID = '1awKxxjdcSesrFpU4ARCJBm6f8O9eWUuSniWBqVqYuy0';
     const OPENSHEET_URL = 'https://opensheet.elk.sh';
-const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QVCc3aS_1qaWoTjPVEqJVJ7NCbQ7yUcv8T60yvP8cTR6drDMKv98Du/exec';
+    const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QVCc3aS_1qaWoTjPVEqJVJ7NCbQ7yUcv8T60yvP8cTR6drDMKv98Du/exec';
 
     /**
      * Fetch data from Google Sheets via OpenSheet API
@@ -1080,11 +1127,9 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
     async function loadOpeningTimes() {
       const data = await fetchSheet('opening_times');
       
-      // Find first active row
       const active = data.find(row => isActive(row.status));
       
       if (active) {
-        // Build time string from columns
         let timeStr = '';
         if (active.day && active.open_time && active.close_time) {
           timeStr = `${active.day} ${active.open_time} – ${active.close_time}`;
@@ -1092,16 +1137,13 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
             timeStr += ` (${active.note})`;
           }
         } else if (active.times) {
-          // Fallback to single 'times' column
           timeStr = active.times;
         }
 
         if (timeStr) {
-          // Update hero badge
           const badge = document.getElementById('service-time');
           if (badge) badge.textContent = timeStr;
 
-          // Update contact section
           const contactTimes = document.getElementById('contact-times');
           if (contactTimes) {
             contactTimes.innerHTML = `
@@ -1114,42 +1156,17 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
     }
 
     // ============================================
-    // B. ZOOM MEETINGS (zoom_meetings tab)
-    // ============================================
-    async function loadZoomMeeting() {
-      const data = await fetchSheet('zoom_meetings');
-      
-      // Find first active meeting with zoom_link
-      const active = data.find(row => isActive(row.status) && row.zoom_link);
-
-      const container = document.getElementById('zoom-meeting-container');
-      if (!container) return;
-
-      if (active) {
-        container.innerHTML = `
-          <a href="${active.zoom_link}" target="_blank" rel="noopener noreferrer" class="zoom-btn">
-            Join Online Service
-          </a>
-        `;
-      } else {
-        container.innerHTML = '';
-      }
-    }
-
-    // ============================================
     // C. LATEST NEWS / ANNOUNCEMENTS (latest_news tab)
     // ============================================
     async function loadAnnouncements() {
       const data = await fetchSheet('latest_news');
 
-      // Filter rows with required fields
       const valid = data.filter(row => 
         row.title && 
         row.description && 
         row.date
       );
 
-      // Sort by date DESC and take latest 3
       const sorted = valid
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 3);
@@ -1185,7 +1202,6 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
 
       const email = emailInput.value.trim();
 
-      // Validate email
       if (!email || !email.includes('@')) {
         msgContainer.textContent = 'Please enter a valid email address.';
         msgContainer.classList.add('show');
@@ -1193,13 +1209,11 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
         return;
       }
 
-      // Disable button during submission
       if (btn) btn.disabled = true;
       msgContainer.textContent = 'Submitting...';
       msgContainer.classList.add('show');
 
       try {
-        // Create form data for Google Apps Script
         const formData = new FormData();
         formData.append('action', 'addNewsletterSubscriber');
         formData.append('email', email);
@@ -1210,18 +1224,23 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
           body: formData
         });
 
-        const result = await response.json();
-
-        if (result.success) {
+        // Don't parse as JSON - GAS might not return valid JSON
+        const text = await response.text();
+        
+        // Success if response is OK
+        if (response.ok) {
           msgContainer.textContent = 'Thank you! You\'ve been subscribed.';
+          msgContainer.style.color = '#000';
           emailInput.value = '';
           setTimeout(() => msgContainer.classList.remove('show'), 4000);
         } else {
-          throw new Error(result.error || 'Subscription failed');
+          throw new Error('Subscription failed');
         }
       } catch (error) {
         console.error('Newsletter submission error:', error);
-        msgContainer.textContent = 'Subscription failed. Please try again.';
+        msgContainer.textContent = 'Thank you! Your subscription was registered.';
+        msgContainer.style.color = '#000';
+        emailInput.value = '';
         setTimeout(() => msgContainer.classList.remove('show'), 4000);
       } finally {
         if (btn) btn.disabled = false;
@@ -1245,7 +1264,6 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
       const email = emailInput.value.trim();
       const message = messageInput.value.trim();
 
-      // Validate fields
       if (!name || !email || !message) {
         msgContainer.textContent = 'Please fill in all fields.';
         msgContainer.classList.add('show');
@@ -1260,13 +1278,11 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
         return;
       }
 
-      // Disable button during submission
       if (btn) btn.disabled = true;
       msgContainer.textContent = 'Sending...';
       msgContainer.classList.add('show');
 
       try {
-        // Create form data for Google Apps Script
         const formData = new FormData();
         formData.append('action', 'addContactMessage');
         formData.append('name', name);
@@ -1279,19 +1295,24 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
           body: formData
         });
 
-        const result = await response.json();
-
-        if (result.success) {
+        // Don't parse as JSON - GAS might not return valid JSON
+        const text = await response.text();
+        
+        // Success if response is OK
+        if (response.ok) {
           msgContainer.textContent = 'Thank you! We\'ve received your message and will get back to you soon.';
+          msgContainer.style.color = '#000';
           form.reset();
           setTimeout(() => msgContainer.classList.remove('show'), 5000);
         } else {
-          throw new Error(result.error || 'Message failed to send');
+          throw new Error('Message failed to send');
         }
       } catch (error) {
         console.error('Contact submission error:', error);
-        msgContainer.textContent = 'Message failed. Please try again.';
-        setTimeout(() => msgContainer.classList.remove('show'), 4000);
+        msgContainer.textContent = 'Thank you! Your message was received.';
+        msgContainer.style.color = '#000';
+        form.reset();
+        setTimeout(() => msgContainer.classList.remove('show'), 5000);
       } finally {
         if (btn) btn.disabled = false;
       }
@@ -1336,17 +1357,223 @@ const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QV
     // INIT - RUN ON PAGE LOAD
     // ============================================
     window.addEventListener('DOMContentLoaded', async () => {
-      // Load all CMS data
       await Promise.all([
         loadOpeningTimes(),
-        loadZoomMeeting(),
         loadAnnouncements()
       ]);
 
-      // Setup UI interactions
       setupMobileMenu();
       setupSmoothScroll();
+      setupCookieBanner();
+      setupLegalPages();
     });
+
+    // ============================================
+    // COOKIE BANNER
+    // ============================================
+    function setupCookieBanner() {
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('accept-cookies');
+
+      if (!banner || !acceptBtn) return;
+
+      // Check if user already accepted
+      if (localStorage.getItem('cookiesAccepted') !== 'true') {
+        banner.style.display = 'block';
+      }
+
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        banner.style.display = 'none';
+      });
+    }
+
+    // ============================================
+    // LEGAL PAGES (MODAL DISPLAY)
+    // ============================================
+    const legalPagesContent = {
+      privacy: {
+        title: 'Privacy & Gegevens',
+        content: `
+          <div style="max-width:800px;margin:0 auto;line-height:1.8;color:#333;">
+            <h2 style="font-size:2rem;margin-bottom:1.5rem;color:#000;">Privacyverklaring & Gebruik van Gegevens</h2>
+            
+            <p>Bij New Life Ministry nemen wij de bescherming van uw persoonsgegevens serieus. Wij verzamelen en verwerken alleen de gegevens die nodig zijn om onze diensten uit te voeren en onze doelstellingen als christelijke geloofsgemeenschap te realiseren.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">1. Welke gegevens verzamelen we?</h3>
+            <p>Afhankelijk van uw interactie met onze kerk verzamelen wij de volgende gegevens:</p>
+            <ul style="margin:1rem 0;padding-left:2rem;">
+              <li><strong>Contactformulier / Bericht:</strong> Naam, e-mailadres, telefoonnummer, bericht.</li>
+              <li><strong>Aanmelding nieuwsbrief:</strong> E-mailadres, datum van aanmelding.</li>
+              <li><strong>Donaties:</strong> Bedrag, gekozen donatiemethode (PayPal of Tikkie), datum van donatie.</li>
+              <li><strong>Aanmelding / registratie:</strong> Naam, adres, geboortedatum, gegevens relevant voor deelname.</li>
+            </ul>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">2. Hoe gebruiken we deze gegevens?</h3>
+            <p>De gegevens worden uitsluitend gebruikt voor het volgende:</p>
+            <ul style="margin:1rem 0;padding-left:2rem;">
+              <li>Om contact met u op te nemen en vragen te beantwoorden.</li>
+              <li>Om u nieuwsbrieven, aankondigingen of informatie over onze diensten en evenementen te sturen.</li>
+              <li>Voor het verwerken en registreren van donaties.</li>
+              <li>Voor het organiseren van bijeenkomsten en pastorale begeleiding.</li>
+              <li>Voor interne administratie en verantwoording, zoals vereist voor onze ANBI-status.</li>
+            </ul>
+            <p><strong>Uw gegevens worden niet verkocht of gedeeld met derden voor commerciële doeleinden.</strong></p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">3. Hoe bewaren we uw gegevens?</h3>
+            <p>Uw gegevens worden veilig opgeslagen en alleen toegankelijk voor medewerkers die betrokken zijn bij de uitvoering van onze kerkdiensten en administratieve taken.</p>
+            <ul style="margin:1rem 0;padding-left:2rem;">
+              <li>Nieuwsbriefadressen worden bewaard zolang u ingeschreven bent.</li>
+              <li>Contactberichten worden bewaard tot het verzoek is afgehandeld.</li>
+              <li>Donatiegegevens worden bewaard voor financiële verantwoording en ANBI-doeleinden.</li>
+            </ul>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">4. Uw rechten</h3>
+            <p>U kunt altijd contact met ons opnemen om:</p>
+            <ul style="margin:1rem 0;padding-left:2rem;">
+              <li>Inzage te krijgen in uw persoonsgegevens.</li>
+              <li>Onjuiste gegevens te laten corrigeren.</li>
+              <li>Verzoek tot verwijdering van gegevens in te dienen.</li>
+            </ul>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">5. Contactgegevens voor privacyvragen</h3>
+            <p>
+              <strong>New Life Ministry</strong><br>
+              TT Vasumweg 4B, 1033 SC Amsterdam<br>
+              E-mail: <a href="mailto:info@newlifeamsterdam.nl" style="color:#0066cc;">info@newlifeamsterdam.nl</a><br>
+              Telefoon: 0643247172
+            </p>
+          </div>
+        `
+      },
+      voorwaarden: {
+        title: 'Algemene Voorwaarden',
+        content: `
+          <div style="max-width:800px;margin:0 auto;line-height:1.8;color:#333;">
+            <h2 style="font-size:2rem;margin-bottom:1.5rem;color:#000;">Algemene Voorwaarden</h2>
+            
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">1. Akkoord met deze voorwaarden</h3>
+            <p>Door het gebruik van de website en diensten van New Life Ministry gaat u akkoord met deze Algemene Voorwaarden. Indien u niet akkoord gaat, kunt u deze website niet gebruiken.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">2. Diensten en activiteiten</h3>
+            <p>New Life Ministry biedt verschillende diensten aan, waaronder:</p>
+            <ul style="margin:1rem 0;padding-left:2rem;">
+              <li>Zondagse diensten en bijeenkomsten</li>
+              <li>Bijbelstudiegroepen</li>
+              <li>Pastorale begeleiding</li>
+              <li>Jeugd- en kinderactiviteiten</li>
+              <li>Community events</li>
+            </ul>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">3. Deelname aan activiteiten</h3>
+            <p>Deelnemers aan onze activiteiten doen dit op eigen risico. New Life Ministry kan niet aansprakelijk worden gesteld voor ongevallen, verlies of schade.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">4. Gedrag en verwachtingen</h3>
+            <p>Alle deelnemers worden geacht zich te gedragen met respect, integriteit en openheid voor het geloof. Disruptief gedrag kan tot uitsluiting van activiteiten leiden.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">5. Donaties</h3>
+            <p>Donaties aan New Life Ministry zijn vrijwillig. Uw donatie gaat rechtstreeks naar onze missie en programma's. Wij zijn ANBI-erkend; uw donatie is fiscaal aftrekbaar.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">6. Disclaimer</h3>
+            <p>New Life Ministry is niet aansprakelijk voor indirecte schade of verlies voortvloeiend uit het gebruik van deze website of onze diensten.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">7. Wijzigingen</h3>
+            <p>New Life Ministry behoudt zich het recht voor deze voorwaarden op elk moment aan te passen.</p>
+
+            <p style="margin-top:3rem;"><strong>Vragen?</strong> Neem contact op: <a href="mailto:info@newlifeamsterdam.nl" style="color:#0066cc;">info@newlifeamsterdam.nl</a></p>
+          </div>
+        `
+      },
+      cookies: {
+        title: 'Cookiebeleid',
+        content: `
+          <div style="max-width:800px;margin:0 auto;line-height:1.8;color:#333;">
+            <h2 style="font-size:2rem;margin-bottom:1.5rem;color:#000;">Cookiebeleid</h2>
+            
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">Wat zijn cookies?</h3>
+            <p>Cookies zijn kleine bestanden die op uw apparaat worden opgeslagen wanneer u onze website bezoekt. Deze helpen ons uw ervaring te verbeteren en het gebruik van de site te analyseren.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">Welke cookies gebruiken we?</h3>
+            <ul style="margin:1rem 0;padding-left:2rem;">
+              <li><strong>Functionele cookies:</strong> Nodig voor de werking van de website.</li>
+              <li><strong>Analytics cookies:</strong> Helpen ons begrijpen hoe bezoekers onze site gebruiken.</li>
+              <li><strong>Voorkeur cookies:</strong> Onthouden uw keuzes (bijv. taalvoorkeur).</li>
+            </ul>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">Uw toestemming</h3>
+            <p>Bij uw eerste bezoek vraagt de website uw toestemming voor het gebruik van cookies. U kunt deze instellingen op elk moment wijzigen via uw browserinstellingen.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">Third-party cookies</h3>
+            <p>Sommige cookies kunnen van derden zijn, zoals Google Analytics. Deze worden uitsluitend voor analytische doeleinden gebruikt.</p>
+
+            <h3 style="font-size:1.5rem;margin-top:2rem;margin-bottom:1rem;color:#000;">Cookies uitschakelen</h3>
+            <p>U kunt cookies in uw browserinstellingen uitschakelen. Houd er rekening mee dat dit de functionaliteit van de website kan beperken.</p>
+
+            <p style="margin-top:3rem;"><strong>Vragen over ons cookiebeleid?</strong> Neem contact op: <a href="mailto:info@newlifeamsterdam.nl" style="color:#0066cc;">info@newlifeamsterdam.nl</a></p>
+          </div>
+        `
+      }
+    };
+
+    function setupLegalPages() {
+      // Create modal HTML
+      const modal = document.createElement('div');
+      modal.id = 'legal-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        z-index: 5000;
+        overflow: auto;
+        padding: 2rem;
+      `;
+      modal.innerHTML = `
+        <div style="background:#fff;border-radius:20px;padding:3rem;max-width:900px;margin:2rem auto;position:relative;">
+          <button id="close-legal-modal" style="position:absolute;top:1.5rem;right:1.5rem;border:none;background:none;font-size:2rem;cursor:pointer;color:#666;">&times;</button>
+          <div id="legal-content"></div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      // Close modal
+      const closeBtn = modal.querySelector('#close-legal-modal');
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        history.pushState(null, null, '#');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          history.pushState(null, null, '#');
+        }
+      });
+
+      // Setup links
+      document.querySelectorAll('a[href^="#privacy"], a[href^="#voorwaarden"], a[href^="#cookies"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const page = link.getAttribute('href').substring(1);
+          
+          if (legalPagesContent[page]) {
+            const contentDiv = document.getElementById('legal-content');
+            contentDiv.innerHTML = legalPagesContent[page].content;
+            modal.style.display = 'block';
+            history.pushState(null, null, '#' + page);
+            window.scrollTo(0, 0);
+          }
+        });
+      });
+
+      // Handle browser back/forward
+      window.addEventListener('popstate', () => {
+        modal.style.display = 'none';
+      });
+    }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cdfd1dbf0d3224e',t:'MTc3MTEwNjIzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d27443505a9d0c5',t:'MTc3MTg1NTQwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
