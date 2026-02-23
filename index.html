@@ -803,9 +803,11 @@
   <style>body { box-sizing: border-box; }</style>
   <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
  </head>
- <body><!-- Navigation -->
+ <body>
+  <!-- Navigation -->
   <nav>
-   <div class="nav-container"><a href="#" class="nav-logo">New Life Ministry</a>
+   <div class="nav-container">
+    <a href="#" class="nav-logo">New Life Ministry</a>
     <ul class="nav-menu">
      <li><a href="#home">Home</a></li>
      <li><a href="#about">About</a></li>
@@ -814,22 +816,27 @@
      <li><a href="#contact">Contact</a></li>
      <li><a href="#donate" class="nav-donate">Donate</a></li>
     </ul><button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
-     <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="18" x2="21" y2="18"></line>
+     <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="18" x2="21" y2="18"></line>
      </svg></button>
    </div><!-- Mobile Menu -->
-   <div id="mobile-menu" class="hidden"><a href="#home">Home</a> <a href="#about">About</a> <a href="#services">Services</a> <a href="#announcements">Announcements</a> <a href="#contact">Contact</a> <a href="#donate" class="nav-donate" style="display: block; margin-top: 1rem; text-align: center;">Donate</a>
+   <div id="mobile-menu" class="hidden">
+    <a href="#home">Home</a> <a href="#about">About</a> <a href="#services">Services</a> <a href="#announcements">Announcements</a> <a href="#contact">Contact</a> <a href="#donate" class="nav-donate" style="display: block; margin-top: 1rem; text-align: center;">Donate</a>
    </div>
   </nav>
-  <main><!-- Hero Section -->
+  <main>
+   <!-- Hero Section -->
    <section id="home" class="hero">
     <div class="hero-content">
      <h1 id="hero-title">Welcome to New Life Ministry</h1>
      <p class="hero-subtitle" id="hero-subtitle">A community built on faith, connection, and authentic transformation.</p>
-     <div class="hero-actions"><a href="#services" class="btn btn-primary">Explore Services</a> <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+     <div class="hero-actions">
+      <a href="#services" class="btn btn-primary">Explore Services</a> <a href="#contact" class="btn btn-secondary">Get In Touch</a>
      </div>
      <div class="service-badge">
       <div class="service-badge-icon">
-       <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+       <svg fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
        </svg>
       </div>
       <div class="service-badge-text">
@@ -906,13 +913,15 @@
        <p class="text-light" style="text-align: center;">Loading announcements...</p>
       </div>
      </div><!-- Calendar -->
-     <div class="calendar-container"><iframe src="https://calendar.google.com/calendar/embed?src=a295f05642f7956eca84fde054465eac1d98649fa71c94ec8679429bb37a0933%40group.calendar.google.com&amp;ctz=Europe%2FAmsterdam" style="border:none;" allowfullscreen loading="lazy"></iframe>
+     <div class="calendar-container">
+      <iframe src="https://calendar.google.com/calendar/embed?src=a295f05642f7956eca84fde054465eac1d98649fa71c94ec8679429bb37a0933%40group.calendar.google.com&amp;ctz=Europe%2FAmsterdam" style="border:none;" allowfullscreen loading="lazy"></iframe>
      </div><!-- Newsletter -->
      <div style="max-width: 600px; margin: 4rem auto 0; text-align: center;">
       <div class="card">
        <h3 class="card-title">Stay Connected</h3>
        <p class="text-muted" style="margin-bottom: 2rem;">Subscribe to receive announcements, prayer requests, and updates about upcoming events.</p>
-       <form onsubmit="event.preventDefault(); handleNewsletterSubmit();" id="newsletter-form" style="display: flex; flex-direction: column; gap: 1rem;"><input type="email" id="newsletter-email" placeholder="Your email address" required style="padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 20px; background: #fafafa; font-family: 'Inter', sans-serif;"> <button type="submit" class="btn btn-primary">Subscribe</button>
+       <form onsubmit="event.preventDefault(); handleNewsletterSubmit();" id="newsletter-form" style="display: flex; flex-direction: column; gap: 1rem;">
+        <input type="email" id="newsletter-email" placeholder="Your email address" required style="padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 20px; background: #fafafa; font-family: 'Inter', sans-serif;"> <button type="submit" class="btn btn-primary">Subscribe</button>
         <div id="newsletter-msg" class="message success"></div>
        </form>
       </div>
@@ -955,15 +964,18 @@
       <div class="card" style="text-align: center; margin-top: 3rem;">
        <h3 class="card-title">Make a Donation</h3>
        <p class="text-muted" style="margin-bottom: 2rem;">Donate securely through PayPal. Every gift makes a real difference in our community.</p>
-       <form action="https://www.paypal.com/donate" method="post" target="_blank" style="margin-bottom: 2rem;"><input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID"> <button type="submit" class="btn btn-primary" style="width: auto;"> Donate via PayPal </button>
+       <form action="https://www.paypal.com/donate" method="post" target="_blank" style="margin-bottom: 2rem;">
+        <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID"> <button type="submit" class="btn btn-primary" style="width: auto;"> Donate via PayPal </button>
        </form>
        <p class="text-light" style="font-size: 0.9rem;">All donations go directly to support our ministry and community programs.</p>
       </div><!-- ANBI Badge -->
       <div class="anbi-section">
        <p style="color: #666; margin-bottom: 1rem;"><strong>Supporting a trusted ministry</strong><br>
          New Life Ministry is registered with ANBI status. Your donations are tax-deductible in the Netherlands.</p>
-       <div class="anbi-badge"><a href="https://anbi.nl/publicatieverplichting/new-life-ministry/" target="_blank" rel="noopener noreferrer"> View ANBI Information 
-         <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7m10 0v10"></path>
+       <div class="anbi-badge">
+        <a href="https://anbi.nl/publicatieverplichting/new-life-ministry/" target="_blank" rel="noopener noreferrer"> View ANBI Information 
+         <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7m10 0v10"></path>
          </svg></a>
        </div>
       </div>
@@ -996,11 +1008,14 @@
       <div class="card">
        <h3 class="card-title">Send us a Message</h3>
        <form onsubmit="event.preventDefault(); handleContactSubmit();" id="contact-form">
-        <div class="form-group"><label for="name">Name</label> <input type="text" id="name" name="name" required placeholder="Your name">
+        <div class="form-group">
+         <label for="name">Name</label> <input type="text" id="name" name="name" required placeholder="Your name">
         </div>
-        <div class="form-group"><label for="email">Email</label> <input type="email" id="email" name="email" required placeholder="your@email.com">
+        <div class="form-group">
+         <label for="email">Email</label> <input type="email" id="email" name="email" required placeholder="your@email.com">
         </div>
-        <div class="form-group"><label for="message">Message</label> <textarea id="message" name="message" required placeholder="Your message..."></textarea>
+        <div class="form-group">
+         <label for="message">Message</label> <textarea id="message" name="message" required placeholder="Your message..."></textarea>
         </div><button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Send Message</button>
         <div id="contact-msg" class="message success"></div>
        </form>
@@ -1025,7 +1040,8 @@
    </div>
    <div class="footer-bottom">
     <p style="margin-bottom:1.5rem;">© 2024 New Life Ministry Amsterdam. All rights reserved. | <a href="https://anbi.nl/publicatieverplichting/new-life-ministry/" target="_blank" rel="noopener noreferrer">ANBI Registered Charity</a></p>
-    <div style="padding-top:1.5rem;border-top:1px solid #e0e0e0;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;"><a href="#privacy" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Privacy &amp; Gegevens</a> <a href="#voorwaarden" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Algemene Voorwaarden</a> <a href="#cookies" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Cookiebeleid</a>
+    <div style="padding-top:1.5rem;border-top:1px solid #e0e0e0;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
+     <a href="#privacy" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Privacy &amp; Gegevens</a> <a href="#voorwaarden" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Algemene Voorwaarden</a> <a href="#cookies" style="color:#666;text-decoration:none;font-size:0.9rem;transition:color 0.3s ease;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">Cookiebeleid</a>
     </div>
    </div>
   </footer><!-- Cookie Banner -->
@@ -1083,75 +1099,78 @@
     const OPENSHEET_URL = 'https://opensheet.elk.sh';
     const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwRsBgIjxWwY6QVCc3aS_1qaWoTjPVEqJVJ7NCbQ7yUcv8T60yvP8cTR6drDMKv98Du/exec';
 
-    /**
-     * Fetch data from Google Sheets via OpenSheet API
-     */
-    async function fetchSheet(tabName) {
-      try {
-        const url = `${OPENSHEET_URL}/${SHEET_ID}/${tabName}`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return await response.json();
-      } catch (error) {
-        console.error(`Sheet fetch error (${tabName}):`, error);
-        return [];
-      }
-    }
 
-    /**
-     * Format date to readable format
-     */
-    function formatDate(dateStr) {
-      try {
-        const date = new Date(dateStr);
-        return new Intl.DateTimeFormat('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        }).format(date);
-      } catch {
-        return dateStr;
-      }
-    }
-
-    /**
-     * Normalize status value (case-insensitive)
-     */
-    function isActive(status) {
-      return status && status.toLowerCase().trim() === 'active';
-    }
 
     // ============================================
     // A. OPENING TIMES (opening_times tab)
     // ============================================
     async function loadOpeningTimes() {
-      const data = await fetchSheet('opening_times');
-      
-      const active = data.find(row => isActive(row.status));
-      
-      if (active) {
-        let timeStr = '';
-        if (active.day && active.open_time && active.close_time) {
-          timeStr = `${active.day} ${active.open_time} – ${active.close_time}`;
-          if (active.note) {
-            timeStr += ` (${active.note})`;
-          }
-        } else if (active.times) {
-          timeStr = active.times;
+      try {
+        const response = await fetch(GAS_WEBHOOK_URL);
+        const data = await response.json();
+
+        if (!data.success || !data.opening_times) {
+          console.error('Invalid opening times response');
+          return;
         }
 
-        if (timeStr) {
+        // Filter active times
+        const activeTimes = data.opening_times.filter(day => 
+          day.status && day.status.toLowerCase().trim() === 'active'
+        );
+
+        if (activeTimes.length === 0) {
+          console.warn('No active opening times found');
+          return;
+        }
+
+        // Update service badge (first active entry)
+        const firstActive = activeTimes[0];
+        if (firstActive) {
+          let badgeText = '';
+          if (firstActive.day) {
+            const open = firstActive.open_time || '';
+            const close = firstActive.close_time || '';
+            badgeText = `${firstActive.day}`;
+            if (open && close) {
+              badgeText += ` ${open} – ${close}`;
+            }
+            if (firstActive.note) {
+              badgeText += ` (${firstActive.note})`;
+            }
+          }
+
           const badge = document.getElementById('service-time');
-          if (badge) badge.textContent = timeStr;
-
-          const contactTimes = document.getElementById('contact-times');
-          if (contactTimes) {
-            contactTimes.innerHTML = `
-              <h4 style="margin-bottom: 0.5rem;">Service Times</h4>
-              <p class="text-muted">${timeStr}<br>Midweek gatherings by appointment</p>
-            `;
-          }
+          if (badge) badge.textContent = badgeText || 'Service times available';
         }
+
+        // Update contact times section
+        const contactTimes = document.getElementById('contact-times');
+        if (contactTimes) {
+          let timesHTML = '<h4 style="margin-bottom: 1rem;">Service Times</h4>';
+          
+          const timesList = activeTimes.map(day => {
+            let timeStr = day.day || '';
+            if (day.open_time && day.close_time) {
+              timeStr += `: ${day.open_time} – ${day.close_time}`;
+              if (day.note) {
+                timeStr += ` (${day.note})`;
+              }
+            } else if (day.open_time) {
+              timeStr += `: ${day.open_time}`;
+              if (day.note) {
+                timeStr += ` (${day.note})`;
+              }
+            }
+            return timeStr;
+          }).join('<br>');
+
+          timesHTML += `<p class="text-muted">${timesList}</p>`;
+          contactTimes.innerHTML = timesHTML;
+        }
+
+      } catch (error) {
+        console.error('Error loading opening times:', error);
       }
     }
 
@@ -1159,35 +1178,47 @@
     // C. LATEST NEWS / ANNOUNCEMENTS (latest_news tab)
     // ============================================
     async function loadAnnouncements() {
-      const data = await fetchSheet('latest_news');
+      try {
+        const response = await fetch(GAS_WEBHOOK_URL);
+        const data = await response.json();
 
-      const valid = data.filter(row => 
-        row.title && 
-        row.description && 
-        row.date
-      );
+        if (!data.success || !data.latest_news) {
+          console.error('Invalid latest news response');
+          return;
+        }
 
-      const sorted = valid
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 3);
+        // Filter active news items
+        const activeNews = data.latest_news.filter(item => 
+          item.status && item.status.toLowerCase().trim() === 'active' &&
+          item.title && item.description
+        );
 
-      const container = document.getElementById('announcements-list');
-      if (!container) return;
+        const container = document.getElementById('announcements-list');
+        if (!container) return;
 
-      if (sorted.length === 0) {
-        container.innerHTML = '<p class="text-light" style="text-align: center;">No announcements at this time.</p>';
-        return;
+        if (activeNews.length === 0) {
+          container.innerHTML = '<p class="text-light" style="text-align: center;">No announcements at this time.</p>';
+          return;
+        }
+
+        // Render news items
+        const html = activeNews.map(item => `
+          <div class="announcement">
+            <div class="announcement-date">${item.date_label || 'Coming Soon'}</div>
+            <h3>${item.title}</h3>
+            <p class="text-muted">${item.description}</p>
+          </div>
+        `).join('');
+
+        container.innerHTML = html;
+
+      } catch (error) {
+        console.error('Error loading announcements:', error);
+        const container = document.getElementById('announcements-list');
+        if (container) {
+          container.innerHTML = '<p class="text-light" style="text-align: center;">Unable to load announcements at this time.</p>';
+        }
       }
-
-      const html = sorted.map(item => `
-        <div class="announcement">
-          <div class="announcement-date">${formatDate(item.date)}</div>
-          <h3>${item.title}</h3>
-          <p class="text-muted">${item.description}</p>
-        </div>
-      `).join('');
-
-      container.innerHTML = html;
     }
 
     // ============================================
@@ -1575,5 +1606,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d27443505a9d0c5',t:'MTc3MTg1NTQwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d279150913bc0f7',t:'MTc3MTg1ODU2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
